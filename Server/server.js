@@ -47,8 +47,8 @@ APP.get('/', (req, res) => {
 //Sends post details to client
 APP.get("/api/posts/", (req, res) => {
     UpdateTableLength();
-    let length = req.query.postPerPage;                         //Number of posts on single page
-    let offset = req.query.recordOffset;                        //Keeps record of last post's index
+    let length = req.query.postCount;                         //Number of posts on single page
+    let offset = req.query.countOffset;                        //Keeps record of last post's index
 
     sql.query(QUERY.getAll, (err, result) => {
         res.send(result.slice(offset, Math.min(offset + length, tableLength)));         //Slices resultant array and sends response
@@ -62,7 +62,7 @@ APP.get("/api/posts/:postID/", (req, res) => {
     });
 });
 
-APP.post("/api/post/", (req, res) => {
+APP.post("/api/posts/", (req, res) => {
     UpdateTableLength();
     const postTitle = req.body.postTitle;               //Stores the post title from request body
     const postContent = req.body.postContent;           //Stores post content from request body
