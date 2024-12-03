@@ -18,11 +18,10 @@ const TABLE_DETAILS = {                 //SQL table details, If you have a datab
     idColumn: "PostID",                          //Type Int
     titleColumn: "PostTitle",                    //Type TinyText
     contentColumn: "PostContent",                //Type MediumText
-    dateColumn: "UploadDate",                    //Type Date
-    timeColumn: "UploadTime"                     //Type Time
+    datetimeColumn: "PostDatetime",                //Type DateTime
 };
 const QUERY = {                         //Uses the TABLE_DETAILS object for queries
-    getAll: `SELECT * FROM ${TABLE_DETAILS.tableName} ORDER BY ${TABLE_DETAILS.dateColumn}, ${TABLE_DETAILS.timeColumn} DESC`,
+    getAll: `SELECT * FROM ${TABLE_DETAILS.tableName} ORDER BY ${TABLE_DETAILS.datetimeColumn} DESC`,
     getOne: `SELECT * FROM ${TABLE_DETAILS.tableName} WHERE ${TABLE_DETAILS.idColumn}=`,
     postOne: `INSERT INTO ${TABLE_DETAILS.tableName} VALUES (`,
 };
@@ -51,14 +50,22 @@ APP.get("/api/posts/", (req, res) => {
     let offset = req.query.countOffset;                        //Keeps record of last post's index
 
     sql.query(QUERY.getAll, (err, result) => {
-        res.send(result.slice(offset, Math.min(offset + length, tableLength)));         //Slices resultant array and sends response
+        const resBody = JSON.stringify({
+            result: result.slice(offset, Math.min(offset + length, tableLength)),
+            method: 0
+        });
+        res.send(resBody);         //Slices resultant array and sends response
     });
 });
 
 //Sends specific post's details to client
 APP.get("/api/posts/:postID/", (req, res) => {
     sql.query(QUERY.getOne + req.body.postID, (err, result) => {
-        res.send(result);                       //Sends response
+        const resBody = JSON.stringify({
+            result: result,
+            method: 1
+        });
+        res.send(resBody);                       //Sends response
     });
 });
 
@@ -67,13 +74,13 @@ APP.post("/api/posts/", (req, res) => {
     const postTitle = req.body.postTitle;               //Stores the post title from request body
     const postContent = req.body.postContent;           //Stores post content from request body
 
-    sql.query(`${QUERY.postOne} ${tableLength}, "${postTitle}", "${postContent}", CURDATE(), CURTIME())`,
+    sql.query(`${QUERY.postOne} ${tableLength}, "${postTitle}", "${postContent}", CURRENT_TIMESTAMP())`,
             (err, result) => {                 //Inserts data into database
         if (err) {
             console.log(err);
-            res.send({error: err.message, rejected: true})              //Error check for testing
+            res.send({error: err.message, method: 2})              //Error check for testing
         }
-        else res.send({rejected: false});                               //Sends 'OK' status
+        else res.send({method: 2});                               //Sends 'OK' status
     });
 
     tableLength += 1;                           //Increments tableLength
