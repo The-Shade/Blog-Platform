@@ -1,9 +1,13 @@
 // Importing and using express framework
 const EXPRESS = require('express');
+const PATH = require('path');
 const MYSQL = require('mysql2');
 const APP = EXPRESS();
 APP.use(EXPRESS.json());                //Built-in middleware function in express for parsing request body
 APP.use(require('cors')());            //Prevents CORS errors
+
+console.log(PATH.join(__dirname, "Website"));
+APP.use(EXPRESS.static('Website'));                 //Provides Static content to client
 
 const SQL_CONFIG = {                 //SQL Server Connection Details
     host: "localhost",
@@ -40,7 +44,8 @@ UpdateTableLength();                                //Updates tableLength
 
 //Sends website files on request
 APP.get('/', (req, res) => {
-    res.send("HELLO");
+    const path = PATH.join(__dirname, "../Website", "index.html");
+    res.sendFile(path);
 });
 
 //Sends post details to client
