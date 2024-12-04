@@ -6,7 +6,6 @@ const APP = EXPRESS();
 APP.use(EXPRESS.json());                //Built-in middleware function in express for parsing request body
 APP.use(require('cors')());            //Prevents CORS errors
 
-console.log(PATH.join(__dirname, "Website"));
 APP.use(EXPRESS.static('Website'));                 //Provides Static content to client
 
 const SQL_CONFIG = {                 //SQL Server Connection Details
