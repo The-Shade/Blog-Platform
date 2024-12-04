@@ -1,0 +1,185 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    font-family: Saira, sans-serif;
+    color: white;
+
+    box-sizing: border-box;
+}
+
+body, #container {
+    width: 100%;
+    height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+}
+
+input {
+    color: black;
+}
+
+#container {
+    background: radial-gradient(farthest-side ellipse at top left, #505254, #111615);
+}
+
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .overlay .close-btn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+    }
+}
+
+.form-items {
+    margin: 15px;
+    height: min-content;
+}
+
+.new-post {
+    height: 40%;
+}
+
+#new-post-title{
+    width: 30%;
+    height: 40px;
+}
+
+#new-post-content {
+    width: 50%;
+    height: 100%;
+
+    border-radius: 25px;
+    text-align: center;
+}
+
+header {
+    width: 100%;
+    height: 80px;
+
+    padding: 15px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: linear-gradient(to left, #111615, transparent 50%);
+}
+
+.btn {
+    width: 100px;
+    height: 40px;
+    border: 0;
+    border-radius: 10px;
+
+    background: transparent;
+
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #279675;
+    transition: background-color 1s ease-in-out 0.15s;
+    border: solid #279675 2px;
+}
+
+main {
+    height: 100%;
+    width: 100%;
+
+    padding: 45px 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    flex-grow: 1;
+
+    overflow-y: scroll;
+}
+
+.blog-post {
+    width: 60%;
+    height: 30%;
+
+    margin: 10px;
+    padding: 15px;
+    border-radius: 25px;
+
+    background: transparent;
+    cursor: pointer;
+}
+
+.blog-post:hover {
+    background:linear-gradient(to top, #279675, transparent 80%);
+    border: solid #279675 2px;
+    transition-property: border-bottom-color, border-left-color, border-right-color, border-top-color;
+    transition-duration: 0.5s;
+    transition-delay: 0.25s;
+}
+
+.blog-post .post-header {
+    width: 100%;
+    height: auto;
+
+    padding: 0 10px;
+    margin-bottom: 5px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.blog-post .post-content-container{
+    padding: 0 15px;
+}
+
+footer {
+    width: 100%;
+    height: 50px;
+}

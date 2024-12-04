@@ -77,6 +77,7 @@ APP.post("/api/posts/", (req, res) => {
     UpdateTableLength();
     const postTitle = req.body.postTitle;               //Stores the post title from request body
     const postContent = req.body.postContent;           //Stores post content from request body
+    console.log(req.body);
 
     sql.query(`${QUERY.postOne} ${tableLength}, "${postTitle}", "${postContent}", CURRENT_TIMESTAMP())`,
             (err, result) => {                 //Inserts data into database

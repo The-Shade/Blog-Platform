@@ -3,41 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>Personal Blog Platform</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="container">
+        <div id="create-post-overlay" class="overlay">
+
+            <a href="javascript:void(0)" class="close-btn" onclick="CloseOverlay()">&times;</a>
+
+            <div class="overlay-content" style="height: 40%">
+                <form style="height: 100%">
+                    <div class="form-items">
+                        <label for="new-post-title">Title: </label>
+                        <input type="text" name="new-post-title" id="new-post-title" required>
+                    </div>
+                    <div class="form-items" style="height: 100%">
+                        <input type="text" name="new-post-content" id="new-post-content" required>
+                    </div>
+                    <div class="form-items">
+                        <button class="btn" onclick="NewPost()">Add Post</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div id="login-overlay" class="overlay">
+
+            <a href="javascript:void(0)" class="close-btn" onclick="CloseOverlay()">&times;</a>
+
+            <div class="overlay-content">
+                <form>
+                    <div class="form-items">
+                        <label for="login-username">Username: </label>
+                        <input type="text" name="username" id="login-username" required>
+                    </div>
+                    <div class="form-items">
+                        <label for="login-password">Password: </label>
+                        <input type="password" name="password" id="login-password" required>
+                    </div>
+                    <div class="form-items">
+                        <button class="btn">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
         <header>
             <h1 class="website-title">Personal Blog Platform</h1>
-            <button class="add-post-btn">Add Post +</button>
-            <button class="login-button">Login</button>
+            <div id="header-button-container">
+                <button id="add-post-btn" class="btn" onclick="OpenPostOverlay()">Add Post +</button>
+                <button id="login-button" class="btn" onclick="OpenLoginOverlay()">Login</button>
+            </div>
         </header>
-        <main>
-            <div class="blog-post">
-                <div class="post-title-content-container">
-                    <h2 class="post-title">Title for the post</h2>
-                    <p class="post-content">Content for the post</p>
-                </div>
-                <div class="post-date-time-container">
-                    <p class="post-date">xx/xx/xxxx</p>
-                    <p class="post-time">xx: xx xm</p>
-                </div>
-            </div>
-            <div class="blog-post">
-                <div class="post-title-content-container">
-                    <h2 class="post-title">Title for the post2</h2>
-                    <p class="post-content">Content for the post2</p>
-                </div>
-                <div class="post-date-time-container">
-                    <p class="post-date">xx/xx/xxxx</p>
-                    <p class="post-time">xx: xx xm</p>
-                </div>
-            </div>
+        <main id="content-container">
         </main>
         <footer>
 
         </footer>
     </div>
-
     <script src="ClientConnection.js"></script>
 </body>
 </html>
